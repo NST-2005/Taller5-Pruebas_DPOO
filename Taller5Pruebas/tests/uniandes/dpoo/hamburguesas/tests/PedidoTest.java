@@ -2,6 +2,9 @@ package uniandes.dpoo.hamburguesas.tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.File;
+import java.nio.file.Files;
+
 //import java.io.File;
 //import java.nio.file.Files;
 
@@ -66,6 +69,35 @@ public class PedidoTest {
 		assertTrue(factura.contains("Precio Total"));
 		assertTrue(factura.contains("17850"));
 		
+	}
+	
+	@Test
+	public void testGuardarFactura() throws Exception
+	{
+		pedido.agregarProducto(hamburguesas);
+		pedido.agregarProducto(papas);
+		
+		File archivo = File.createTempFile("factura-prueba", ".txt");
+		
+		pedido.guardarFactura(archivo);
+		
+		String contenido = Files.readString(archivo.toPath());
+		
+		assertTrue(contenido.contains("Cliente: Nata"));
+	    assertTrue(contenido.contains("Dirección: Calle 123"));
+	    assertTrue(contenido.contains("Hamburguesa"));
+	    assertTrue(contenido.contains("Papas"));
+	    assertTrue(contenido.contains("Precio Total"));
+	    assertTrue(contenido.contains("17850"));
+
+	    archivo.delete();
+		
+	}
+	
+	@Test
+	public void testGetIdPedido()
+	{
+		assertTrue(pedido.getIdPedido()>=0);
 	}
 	
 	}
