@@ -47,10 +47,6 @@ public class RestauranteTest {
 		assertNull(restaurante.getPedidoEnCurso());
 		
 	}
-	
-	//@Test
-	//public void testCargarInformacion() throws Exception
-	//{
 		
 	
 }
